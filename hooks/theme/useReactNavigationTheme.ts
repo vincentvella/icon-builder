@@ -8,7 +8,7 @@ const navigationTheme = {
     primary: colors.white,
     card: colors.white,
     text: colors.black,
-    background: colors.white,
+    background: colors.neutral[100],
     border: colors.black,
     notification: colors.white,
   },
