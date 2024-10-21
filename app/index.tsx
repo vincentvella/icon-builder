@@ -2,14 +2,19 @@ import { AppIconContainer } from "@/components/AppIconImage";
 import { ColorPicker } from "@/components/color-picker/ColorPicker";
 import { ScrollView } from "@/components/core/ScrollView";
 import { EmojiPicker, EmojiReturnValue } from "@/components/EmojiPicker";
-import { useRouter } from "expo-router";
+import { useGlobalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
 import colors from "tailwindcss/colors";
 
 function App() {
-  const [color, setColor] = useState<string>(colors.white);
-  const [emoji, setEmoji] = useState<EmojiReturnValue | null>(null);
+  const params = useGlobalSearchParams();
+  const [color, setColor] = useState<string>(
+    (params.color as string) ?? colors.white,
+  );
+  const [emoji, setEmoji] = useState<Pick<EmojiReturnValue, "unified"> | null>({
+    unified: params.emoji as string,
+  });
   const [image, setImage] = useState<string | null>(null);
 
   const { setParams } = useRouter();
@@ -20,15 +25,10 @@ function App() {
     setImage(null);
   }
 
-  function setColorAndUpdateURL(color: string) {
-    setParams({ color });
-    setColor(color);
-  }
-
   function onError() {
     if (emoji) {
+      // Some icons aren't hosted by Twitter, so we need to split the emoji ID and find the closest match
       const split = emoji.unified.split("-").slice(0, -1).join("-");
-      console.log(split);
       if (split !== emoji.unified) {
         setEmoji((emoji) => {
           if (emoji) {
@@ -47,14 +47,13 @@ function App() {
     <ScrollView className="flex-1 md:m-4 gap-4">
       <View className="flex-col md:flex-row">
         <View className="flex-1 justify-center self-center items-center my-4">
-          <View className="p-12 px-8 bg-white dark:bg-neutral-900 items-center rounded-[10px] drop-shadow-sm m-2">
+          <View className="p-8 px-8 bg-white dark:bg-neutral-900 items-center rounded-[10px] drop-shadow-sm m-2 h-[435px]">
             <AppIconContainer
               onError={onError}
               color={color}
-              onPress={() => {}}
               emojiId={emoji?.unified ?? undefined}
             />
-            <ColorPicker onValueChanged={setColorAndUpdateURL} />
+            <ColorPicker onValueChanged={setColor} />
           </View>
         </View>
         <View className="flex-1 justify-center self-center items-center">

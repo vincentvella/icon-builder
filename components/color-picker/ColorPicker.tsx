@@ -1,41 +1,44 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import colors from "tailwindcss/colors";
 import { ColorView } from "./ColorView";
 import { ColorPickerInput } from "./ColorPickerInput";
-import { ScrollView } from "../core/ScrollView";
+import { useGlobalSearchParams, useRouter } from "expo-router";
 
-export function ColorPicker({
-  isMobile,
-  onValueChanged,
-  ...props
-}: React.ComponentProps<typeof ScrollView> & {
-  isMobile?: boolean;
+type ColorPickerProps = {
   onValueChanged: (hex: string) => void;
-}) {
-  const [text, onTextChanged] = React.useState("FFFFFF");
+};
+
+export function ColorPicker({ onValueChanged }: ColorPickerProps) {
+  const params = useGlobalSearchParams();
+  const { setParams } = useRouter();
+  const [text, setText] = React.useState<string>(
+    (params.color as string) ?? colors.white,
+  );
+
+  function handleColorChange(hex: string) {
+    if (!hex.startsWith("#")) {
+      hex = `#${hex}`;
+    }
+    setParams({ color: hex });
+    setText(hex);
+    onValueChanged(hex);
+  }
 
   return (
-    <ScrollView
-      {...props}
-      className="sm:min-h-12 sm:max-h-48 flex-shrink flex-grow-0 max-w-72"
-      contentContainerClassName="py-3 sm:w-full flex-row flex-wrap"
-      horizontal={isMobile}
-      pagingEnabled
-    >
-      {COLORS.map((color) => (
-        <TouchableOpacity key={color} onPress={() => onValueChanged(color)}>
-          <ColorView color={color} pad />
-        </TouchableOpacity>
-      ))}
-      <ColorPickerInput
-        value={text}
-        onValueChanged={onTextChanged}
-        onSubmit={(value) => {
-          onValueChanged(value);
-        }}
-      />
-    </ScrollView>
+    <View className="flex-shrink flex-grow-0 max-w-72">
+      <View className="flex-row flex-wrap py-5">
+        {COLORS.map((color) => (
+          <TouchableOpacity
+            key={color}
+            onPress={() => handleColorChange(color)}
+          >
+            <ColorView color={color} pad />
+          </TouchableOpacity>
+        ))}
+      </View>
+      <ColorPickerInput value={text} onValueChanged={handleColorChange} />
+    </View>
   );
 }
 

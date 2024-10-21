@@ -1,12 +1,11 @@
-import React, { useRef } from "react";
-import { Image, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { Image, View } from "react-native";
 import { twitterEmoji } from "./utils/ImageOps";
 
 type AppIconImageProps = {
   color: string;
   image?: string;
   emojiId?: string;
-  onPress: () => void;
   onError: () => void;
 };
 
@@ -43,21 +42,16 @@ export function AppIconContainer({
   color,
   image,
   emojiId,
-  onPress,
   onError,
 }: AppIconImageProps) {
   return (
-    <TouchableOpacity
-      className="size-40 items-center"
-      activeOpacity={0.6}
-      onPress={onPress}
-    >
+    <View className="size-40 items-center">
       <View
         className="drop-shadow-md dark:shadow-neutral-900 shadow-zinc-800 rounded-[38.4px] size-32 justify-center items-center"
         style={{ backgroundColor: color }}
       >
         <AppIconImage image={image} emojiId={emojiId} onError={onError} />
       </View>
-    </TouchableOpacity>
+    </View>
   );
 }
