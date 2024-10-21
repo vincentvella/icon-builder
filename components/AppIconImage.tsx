@@ -19,7 +19,7 @@ function AppIconImage({
       <Image
         className="size-24 flex-1"
         source={{ uri: image }}
-        style={{ resizeMode: "cover" }}
+        style={{ resizeMode: "contain" }}
       />
     );
   }

@@ -17,14 +17,21 @@ function App() {
   const [emoji, setEmoji] = useState<Pick<EmojiReturnValue, "unified"> | null>({
     unified: params.emoji as string,
   });
-  const [image, setImage] = useState<string | null>(null);
+  const [image, setImage] = useState<string | undefined>(undefined);
 
   const { setParams } = useRouter();
 
-  function setEmojiAndUpdateURL(emoji: EmojiReturnValue) {
-    setParams({ emoji: emoji.unified });
-    setEmoji(emoji);
-    setImage(null);
+  function setEmojiAndUpdateURL(emoji: EmojiReturnValue | null) {
+    if (emoji) {
+      setParams({ emoji: emoji.unified });
+      setEmoji(emoji);
+      setImage(undefined);
+    }
+  }
+
+  function setImageAndHandleEmoji(image: string) {
+    setImage(image);
+    setEmoji(null);
   }
 
   function onError() {
@@ -56,18 +63,25 @@ function App() {
             <AppIconContainer
               onError={onError}
               color={color}
+              image={image}
               emojiId={emoji?.unified ?? undefined}
             />
             <ColorPicker onValueChanged={setColor} />
           </View>
         </View>
         <View className="flex-1 justify-center self-center items-center">
-          <EmojiPicker onSelect={setEmojiAndUpdateURL} />
+          <EmojiPicker
+            onSelect={setEmojiAndUpdateURL}
+            onSelectImage={setImageAndHandleEmoji}
+          />
         </View>
       </View>
       <TouchableOpacity
         className="m-5 bg-primary rounded-lg p-4 justify-center items-center"
-        onPress={() => generateImagesAsync({ color, emojiId: emoji?.unified })}
+        activeOpacity={0.6}
+        onPress={() =>
+          generateImagesAsync({ color, emojiId: emoji?.unified, image })
+        }
       >
         <Text className="text-white text-2xl">Generate Icon</Text>
       </TouchableOpacity>

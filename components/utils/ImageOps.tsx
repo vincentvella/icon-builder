@@ -11,25 +11,22 @@ function loadImageAsync(uri: string): Promise<HTMLImageElement> {
   });
 }
 
-function drawImageScaled(img: HTMLImageElement, ctx: CanvasRenderingContext2D) {
-  var canvas = ctx.canvas;
-  var hRatio = canvas.width / img.width;
-  var vRatio = canvas.height / img.height;
-  var ratio = Math.max(hRatio, vRatio);
-  var centerShift_x = (canvas.width - img.width * ratio) / 2;
-  var centerShift_y = (canvas.height - img.height * ratio) / 2;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(
-    img,
-    0,
-    0,
-    img.width,
-    img.height,
-    centerShift_x,
-    centerShift_y,
-    img.width * ratio,
-    img.height * ratio,
-  );
+function drawImageScaled(
+  img: HTMLImageElement,
+  ctx: CanvasRenderingContext2D,
+  padding: number,
+) {
+  // scale the image to fit the canvas while maintaining aspect ratio and accounting for padding
+  const canvas = ctx.canvas;
+  const aspectRatio = img.width / img.height;
+  const pad = padding * 2;
+  const width =
+    aspectRatio < 1 ? (canvas.height - pad) * aspectRatio : canvas.width - pad;
+  const height =
+    aspectRatio > 1 ? (canvas.width - pad) / aspectRatio : canvas.height - pad;
+  const offsetX = (canvas.width - width) / 2;
+  const offsetY = (canvas.height - height) / 2;
+  ctx.drawImage(img, offsetX, offsetY, width, height);
 }
 
 export async function createAppIcon({
@@ -37,13 +34,13 @@ export async function createAppIcon({
   imageUrl,
   emojiId,
   size,
-  emojiPadding,
+  padding,
 }: {
   color: string;
   imageUrl?: string;
   emojiId?: string;
   size: number;
-  emojiPadding: number;
+  padding: number;
 }): Promise<string> {
   let canvas = document.createElement("canvas");
   canvas.width = size;
@@ -57,11 +54,11 @@ export async function createAppIcon({
 
   if (imageUrl) {
     const imageSource = await loadImageAsync(imageUrl);
-    drawImageScaled(imageSource, ctx);
+    drawImageScaled(imageSource, ctx, padding);
   } else if (emojiId) {
     const emojiUrl = twitterEmoji(emojiId);
     // const emojiPadding = size * 0.125;
-    const emojiSize = size - emojiPadding * 2;
+    const emojiSize = size - padding * 2;
     const emojiOffset = (size - emojiSize) / 2;
     const imageSource = await loadImageAsync(emojiUrl);
     // draw image
@@ -95,7 +92,7 @@ export async function generateImagesAsync({
     emojiId: emojiId,
     imageUrl: image,
     size: 2048,
-    emojiPadding: 832,
+    padding: 832,
   });
 
   const icon = await createAppIcon({
@@ -103,14 +100,14 @@ export async function generateImagesAsync({
     emojiId: emojiId,
     imageUrl: image,
     size: 1024,
-    emojiPadding: 128,
+    padding: 128,
   });
   const faviconPng = await createAppIcon({
     color: "transparent",
     emojiId: emojiId,
     imageUrl: image,
     size: 48,
-    emojiPadding: 0,
+    padding: 0,
   });
 
   const iconB64 = imageUriToBase64(icon);
