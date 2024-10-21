@@ -1,8 +1,8 @@
 import { AppIconContainer } from "@/components/AppIconImage";
 import { ColorPicker } from "@/components/color-picker/ColorPicker";
-import { Button } from "@/components/core/Button";
 import { ScrollView } from "@/components/core/ScrollView";
 import { EmojiPicker, EmojiReturnValue } from "@/components/EmojiPicker";
+import { Footer } from "@/components/Footer";
 import { generateImagesAsync } from "@/components/utils/ImageOps";
 import { useGlobalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
@@ -46,7 +46,10 @@ function App() {
   }
 
   return (
-    <ScrollView className="flex-1 md:m-4 gap-4">
+    <ScrollView
+      className="flex-1 md:m-4 gap-4"
+      contentContainerClassName="h-full"
+    >
       <View className="flex-col md:flex-row">
         <View className="flex-1 justify-center self-center items-center my-4">
           <View className="p-8 px-8 bg-white dark:bg-neutral-900 items-center rounded-[10px] drop-shadow-sm m-2 h-[435px]">
@@ -68,6 +71,7 @@ function App() {
       >
         <Text className="text-white text-2xl">Generate Icon</Text>
       </TouchableOpacity>
+      <Footer />
     </ScrollView>
   );
 }

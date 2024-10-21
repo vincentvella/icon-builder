@@ -4,7 +4,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
-import Header from "@/components/Header";
+import { Header } from "@/components/Header";
 import { ThemeProvider } from "@react-navigation/native";
 import { useReactNavigationTheme } from "@/hooks/theme/useReactNavigationTheme";
 import { ThemeContextProvider } from "@/hooks/theme/ThemeContext";
