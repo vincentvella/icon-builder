@@ -45,7 +45,7 @@ export function EmojiPicker({ onSelect, onSelectImage }: EmojiPickerProps) {
       <TouchableOpacity
         onPress={uploadImageAsync}
         activeOpacity={0.6}
-        className=" bg-primary rounded-lg m-2 justify-center items-center p-4"
+        className=" bg-primary rounded-md m-2 justify-center items-center p-4"
       >
         <Text className="text-white text-2xl">Upload Image</Text>
       </TouchableOpacity>
