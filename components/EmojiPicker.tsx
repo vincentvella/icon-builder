@@ -41,14 +41,19 @@ export function EmojiPicker({ onSelect, onSelectImage }: EmojiPickerProps) {
   }
 
   return (
-    <View>
+    <View className="bg-white dark:bg-neutral-900 rounded-[10px]">
       <TouchableOpacity
         onPress={uploadImageAsync}
         activeOpacity={0.6}
-        className=" bg-primary rounded-lg p-4 justify-center items-center"
+        className=" bg-primary rounded-lg m-2 justify-center items-center p-4"
       >
         <Text className="text-white text-2xl">Upload Image</Text>
       </TouchableOpacity>
+      <View className="flex-row justify-center">
+        <View className="h-0.5 flex-1 self-center bg-white m-4" />
+        <Text className="text-white text-2xl">&nbsp;or&nbsp;</Text>
+        <View className="h-0.5 flex-1 self-center bg-white m-4" />
+      </View>
       <Picker
         theme={colorScheme}
         set="twitter"

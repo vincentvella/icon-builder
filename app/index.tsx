@@ -30,6 +30,7 @@ function App() {
   }
 
   function setImageAndHandleEmoji(image: string) {
+    setParams({ emoji: undefined });
     setImage(image);
     setEmoji(null);
   }
@@ -59,7 +60,7 @@ function App() {
     >
       <View className="flex-col md:flex-row">
         <View className="flex-1 justify-center self-center items-center my-4">
-          <View className="p-8 px-8 bg-white dark:bg-neutral-900 items-center rounded-[10px] drop-shadow-sm m-2 h-[435px]">
+          <View className="p-8 px-8 bg-white dark:bg-neutral-900 items-center rounded-[10px] drop-shadow-sm m-2 h-[549px]">
             <AppIconContainer
               onError={onError}
               color={color}
