@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { twitterEmoji } from "./utils/ImageOps";
 
@@ -7,16 +7,18 @@ type AppIconImageProps = {
   image?: string;
   emojiId?: string;
   onPress: () => void;
+  onError: () => void;
 };
 
 function AppIconImage({
   image,
   emojiId,
-}: Pick<AppIconImageProps, "image" | "emojiId">) {
+  onError,
+}: Pick<AppIconImageProps, "image" | "emojiId" | "onError">) {
   if (image) {
     return (
       <Image
-        className="size-32 flex-1"
+        className="size-24 flex-1"
         source={{ uri: image }}
         style={{ resizeMode: "cover" }}
       />
@@ -26,8 +28,9 @@ function AppIconImage({
   if (emojiId) {
     return (
       <Image
-        className="size-32 flex-1"
+        className="size-24 flex-1"
         source={{ uri: twitterEmoji(emojiId) }}
+        onError={onError}
         style={{ resizeMode: "contain" }}
       />
     );
@@ -41,15 +44,19 @@ export function AppIconContainer({
   image,
   emojiId,
   onPress,
+  onError,
 }: AppIconImageProps) {
-  console.log(color);
   return (
-    <TouchableOpacity activeOpacity={0.6} onPress={onPress}>
+    <TouchableOpacity
+      className="size-40 items-center"
+      activeOpacity={0.6}
+      onPress={onPress}
+    >
       <View
         className="drop-shadow-md dark:shadow-neutral-900 shadow-zinc-800 rounded-[38.4px] size-32 justify-center items-center"
         style={{ backgroundColor: color }}
       >
-        <AppIconImage image={image} emojiId={emojiId} />
+        <AppIconImage image={image} emojiId={emojiId} onError={onError} />
       </View>
     </TouchableOpacity>
   );

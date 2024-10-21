@@ -39,7 +39,7 @@ export default function Root({ children }: PropsWithChildren) {
           }}
         />
       </head>
-      <body className="bg-white dark:bg-slate-900">{children}</body>
+      <body className="bg-white dark:bg-neutral-900">{children}</body>
     </html>
   );
 }

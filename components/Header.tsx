@@ -6,7 +6,7 @@ import { Text, View } from "react-native";
 function HeaderComponent() {
   const { colorScheme, toggleColorScheme } = useTheme();
   return (
-    <Header className="dark:bg-neutral-900 bg-neutral-100 drop-shadow-lg mb-4">
+    <Header className="dark:bg-neutral-900 bg-neutral-100 drop-shadow-lg">
       <View className="flex-row items-center p-4">
         <A href="/">
           <Text className="text-black dark:text-white text-2xl my-4">

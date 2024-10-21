@@ -1,5 +1,5 @@
 import Picker from "@emoji-mart/react";
-import { EmojiMartData } from "@emoji-mart/data";
+import { Emoji, EmojiMartData } from "@emoji-mart/data";
 import React from "react";
 import { useTheme } from "@/hooks/theme/ThemeContext";
 
@@ -109,26 +109,27 @@ export function transformId(id = "", name = ""): string | undefined {
   return id.split("-")[0] || "";
 }
 
-export function EmojiPicker({
-  onSelect,
-  isMobile,
-}: {
-  isMobile?: boolean;
-  onSelect: (data: EmojiMartData) => void;
-}) {
+export type EmojiReturnValue = Emoji & { unified: string };
+export type EmojiSelectEvent = (data: EmojiReturnValue) => void;
+
+type EmojiPickerProps = {
+  onSelect: EmojiSelectEvent;
+};
+
+export function EmojiPicker({ onSelect }: EmojiPickerProps) {
   const { colorScheme } = useTheme();
   const isDark = colorScheme === "dark";
+  const color = isDark ? "white" : "#4630eb";
   return (
     <Picker
-      style={isMobile ? { flex: 1, borderRadius: 0 } : {}}
-      theme={isDark ? "dark" : "light"}
+      theme={colorScheme}
       set="twitter"
       notFoundEmoji="mag"
-      color={isDark ? "white" : "#4630eb"}
+      color={color}
       title=""
       showPreview={false}
       emoji="bacon"
-      onSelect={onSelect}
+      onEmojiSelect={onSelect}
       showSkinTones={false}
     />
   );

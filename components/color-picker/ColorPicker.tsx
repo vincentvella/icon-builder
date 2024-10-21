@@ -3,7 +3,7 @@ import { TouchableOpacity } from "react-native";
 import colors from "tailwindcss/colors";
 import { ColorView } from "./ColorView";
 import { ColorPickerInput } from "./ColorPickerInput";
-import { ScrollView } from "./core/ScrollView";
+import { ScrollView } from "../core/ScrollView";
 
 export function ColorPicker({
   isMobile,
