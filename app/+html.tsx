@@ -1,5 +1,5 @@
-import { ScrollViewStyleReset } from 'expo-router/html';
-import { type PropsWithChildren } from 'react';
+import { ScrollViewStyleReset } from "expo-router/html";
+import { type PropsWithChildren } from "react";
 
 /**
  * This file is web-only and used to configure the root HTML for every web page during static rendering.
@@ -11,7 +11,10 @@ export default function Root({ children }: PropsWithChildren) {
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
 
         {/*
           Disable body scrolling on web. This makes ScrollView components work closer to how they do on native.
@@ -20,20 +23,23 @@ export default function Root({ children }: PropsWithChildren) {
         <ScrollViewStyleReset />
 
         {/* Using raw CSS styles as an escape-hatch to ensure the background color never flickers in dark-mode. */}
-        <style dangerouslySetInnerHTML={{ __html: responsiveBackground }} />
+        {/* <style dangerouslySetInnerHTML={{ __html: responsiveBackground }} /> */}
         {/* Add any additional <head> elements that you want globally available on web... */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+                try {
+                  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark')
+                  } else {
+                    document.documentElement.classList.remove('dark')
+                  }
+                } catch (_) {}
+              `,
+          }}
+        />
       </head>
-      <body>{children}</body>
+      <body className="bg-white dark:bg-slate-900">{children}</body>
     </html>
   );
 }
-
-const responsiveBackground = `
-body {
-  background-color: #fff;
-}
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #000;
-  }
-}`;
