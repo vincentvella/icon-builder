@@ -1,10 +1,12 @@
 import { AppIconContainer } from "@/components/AppIconImage";
 import { ColorPicker } from "@/components/color-picker/ColorPicker";
+import { Button } from "@/components/core/Button";
 import { ScrollView } from "@/components/core/ScrollView";
 import { EmojiPicker, EmojiReturnValue } from "@/components/EmojiPicker";
+import { generateImagesAsync } from "@/components/utils/ImageOps";
 import { useGlobalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
-import { View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import colors from "tailwindcss/colors";
 
 function App() {
@@ -60,6 +62,12 @@ function App() {
           <EmojiPicker onSelect={setEmojiAndUpdateURL} />
         </View>
       </View>
+      <TouchableOpacity
+        className="m-5 bg-primary rounded-lg p-4 justify-center items-center"
+        onPress={() => generateImagesAsync({ color, emojiId: emoji?.unified })}
+      >
+        <Text className="text-white text-2xl">Generate Icon</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }

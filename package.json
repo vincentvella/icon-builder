@@ -35,6 +35,7 @@
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
     "nativewind": "4.1.17",
+    "query-string": "^9.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.5",
