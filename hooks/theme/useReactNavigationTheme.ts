@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import colors from "tailwindcss/colors";
-import { ColorScheme } from "./types";
 import { useMemo } from "react";
+import { useTheme } from "./ThemeContext";
 
 const navigationTheme = {
   light: {
@@ -16,17 +16,18 @@ const navigationTheme = {
     primary: colors.black,
     card: colors.black,
     text: colors.black,
-    background: colors.neutral[50],
+    background: colors.neutral[800],
     border: colors.black,
     notification: colors.black,
   },
 } satisfies Record<"light" | "dark", Theme["colors"]>;
 
-export function useReactNavigationTheme(scheme: ColorScheme) {
+export function useReactNavigationTheme() {
+  const { colorScheme } = useTheme();
   return useMemo(() => {
     return {
-      dark: scheme === "dark",
-      colors: navigationTheme[scheme],
+      dark: colorScheme === "dark",
+      colors: navigationTheme[colorScheme],
     };
-  }, [scheme]);
+  }, [colorScheme]);
 }
