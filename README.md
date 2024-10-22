@@ -1,39 +1,34 @@
-# Welcome to your Expo app 👋
+# Expo App Icon Builder
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+
+## What's in this app?
+
+This app is a simple app that lets you create an app icon for your Expo project using emojis or uploaded images.
+
+[NativeWind](https://nativewind.dev) for styling.
+
+[Expo Router](https://docs.expo.dev/router/introduction) for routing.
+
+[EmojiMart](https://github.com/missive/emoji-mart) for emoji picker.
+
+I ported most of the app icon image generation code from [Evan Bacon's Original Icon Builder](https://github.com/EvanBacon/icon-builder).
+
+> The Original Icon Builder from Evan was unfortunately subject to the [MaxCDN shutdown](https://github.com/twitter/twemoji/issues/580)
 
 ## Get started
 
 1. Install dependencies
 
    ```bash
-   npm install
+   bun install
    ```
 
-2. Start the app
+2. Start the website
 
    ```bash
-    npx expo start
+    bunx start -w
    ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
 ## Learn more
 
