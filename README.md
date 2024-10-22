@@ -1,5 +1,7 @@
 # Expo App Icon Builder
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0a6765da-9416-4997-bef2-830d99dcc0f1/deploy-status)](https://app.netlify.com/sites/app-icon-builder/deploys)
+
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
 ## What's in this app?
