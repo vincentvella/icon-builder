@@ -33,6 +33,10 @@ function RootLayout() {
     <ThemeProvider value={theme}>
       <Stack>
         <Stack.Screen name="index" options={{ header: Header }} />
+        <Stack.Screen
+          name="links"
+          options={{ presentation: "transparentModal", headerShown: false }}
+        />
         <Stack.Screen name="+not-found" options={{ header: Header }} />
       </Stack>
     </ThemeProvider>

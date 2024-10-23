@@ -3,8 +3,10 @@ import { ColorPicker } from "@/components/color-picker/ColorPicker";
 import { ScrollView } from "@/components/core/ScrollView";
 import { EmojiPicker, EmojiReturnValue } from "@/components/EmojiPicker";
 import { Footer } from "@/components/Footer";
+import { cn } from "@/components/utils/cn";
 import { generateImagesAsync } from "@/components/utils/ImageOps";
 import { useGlobalSearchParams, useRouter } from "expo-router";
+import queryString from "query-string";
 import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import colors from "tailwindcss/colors";
@@ -19,7 +21,7 @@ function App() {
   });
   const [image, setImage] = useState<string | undefined>(undefined);
 
-  const { setParams } = useRouter();
+  const { setParams, push } = useRouter();
 
   function setEmojiAndUpdateURL(emoji: EmojiReturnValue | null) {
     if (emoji) {
@@ -77,20 +79,28 @@ function App() {
           />
         </View>
       </View>
-      <View className="flex-row justify-center items-center">
+      <View className="flex-row">
         <TouchableOpacity
-          className="m-5 bg-primary rounded-lg p-4 justify-center items-center"
+          className="m-5 bg-primary rounded-lg p-4 justify-center items-center flex-1"
           activeOpacity={0.6}
           onPress={() =>
-            generateImagesAsync({ color, emojiId: emoji?.unified, image })}
+            generateImagesAsync({ color, emojiId: emoji?.unified, image })
+          }
         >
           <Text className="text-white text-2xl">Generate Icon</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          className="m-5 bg-primary rounded-lg p-4 justify-center items-center"
+          className={cn(
+            "m-5 bg-primary rounded-lg p-4 justify-center items-center flex-1",
+            !!image && "cursor-not-allowed opacity-50",
+          )}
+          disabled={!!image}
           activeOpacity={0.6}
           onPress={() =>
-            generateImagesAsync({ color, emojiId: emoji?.unified, image })}
+            push(
+              `/links?${queryString.stringify({ color, emoji: emoji?.unified })}`,
+            )
+          }
         >
           <Text className="text-white text-2xl">Generate Links</Text>
         </TouchableOpacity>

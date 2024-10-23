@@ -58,6 +58,7 @@ async function generateImage(color: string, emoji: string, spec: ImageSpec) {
   const ctx = canvas.getContext("2d")!;
 
   // draw color
+  console.log(color);
   ctx.fillStyle = color as string;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   const emojiSize = size - padding * 2;
@@ -92,6 +93,7 @@ app.get("/icon", async (req: express.Request, res: express.Response) => {
   }
 
   const { emoji, color } = result.data;
+  console.log("color", color, emoji);
   const image = await generateImage(color, emoji, imageSpecs.icon);
   res.setHeader("Content-Type", "image/png").send(image);
 });
