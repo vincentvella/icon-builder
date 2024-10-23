@@ -1,5 +1,6 @@
-import { Link, router, useGlobalSearchParams, useRouter } from "expo-router";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { useGlobalSearchParams, useRouter } from "expo-router";
+import queryString from "query-string";
+import { Pressable, Text, View } from "react-native";
 
 export default function Modal() {
   const router = useRouter();
@@ -11,8 +12,9 @@ export default function Modal() {
     router.dismiss();
   }
 
-  const iconLink = `https://icon-builder.up.railway.app/icon?emoji=${emoji}&color=${color}`;
-  const splashLink = `https://icon-builder.up.railway.app/splash?emoji=${emoji}&color=${color}`;
+  const query = queryString.stringify({ emoji, color });
+  const iconLink = `https://icon-builder.up.railway.app/icon?${query}`;
+  const splashLink = `https://icon-builder.up.railway.app/splash?${query}`;
 
   return (
     <>
