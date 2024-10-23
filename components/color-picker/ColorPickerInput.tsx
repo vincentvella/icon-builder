@@ -33,9 +33,7 @@ export function ColorPickerInput({
         <Text className="self-center dark:color-white color-zinc-400">#</Text>
       </View>
       <TextInput
-        className={
-          "flex-1 px-1 outline-transparent dark:color-white color-stone-500 p-2 dark:border-neutral-800 outline-none"
-        }
+        className="flex-1 px-1 outline-transparent dark:color-white color-stone-500 p-2 dark:border-neutral-800 outline-none"
         autoCapitalize="none"
         autoCorrect={false}
         value={value.replace("#", "")}

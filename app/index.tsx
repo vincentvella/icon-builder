@@ -77,15 +77,24 @@ function App() {
           />
         </View>
       </View>
-      <TouchableOpacity
-        className="m-5 bg-primary rounded-lg p-4 justify-center items-center"
-        activeOpacity={0.6}
-        onPress={() =>
-          generateImagesAsync({ color, emojiId: emoji?.unified, image })
-        }
-      >
-        <Text className="text-white text-2xl">Generate Icon</Text>
-      </TouchableOpacity>
+      <View className="flex-row justify-center items-center">
+        <TouchableOpacity
+          className="m-5 bg-primary rounded-lg p-4 justify-center items-center"
+          activeOpacity={0.6}
+          onPress={() =>
+            generateImagesAsync({ color, emojiId: emoji?.unified, image })}
+        >
+          <Text className="text-white text-2xl">Generate Icon</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          className="m-5 bg-primary rounded-lg p-4 justify-center items-center"
+          activeOpacity={0.6}
+          onPress={() =>
+            generateImagesAsync({ color, emojiId: emoji?.unified, image })}
+        >
+          <Text className="text-white text-2xl">Generate Links</Text>
+        </TouchableOpacity>
+      </View>
       <Footer />
     </ScrollView>
   );
