@@ -42,7 +42,7 @@ export async function createAppIcon({
   size: number;
   padding: number;
 }): Promise<string> {
-  let canvas = document.createElement("canvas");
+  const canvas = document.createElement("canvas");
   canvas.width = size;
   canvas.height = size;
 
@@ -78,6 +78,26 @@ function imageUriToBase64(imageUri: string): string {
   return imageUri.substring(imageUri.indexOf("base64,") + "base64,".length);
 }
 
+export type ImageSpec = {
+  size: number;
+  padding: number;
+};
+
+export const imageSpecs: Record<string, ImageSpec> = {
+  icon: {
+    size: 1024,
+    padding: 128,
+  },
+  splash: {
+    size: 2048,
+    padding: 832,
+  },
+  favicon: {
+    size: 48,
+    padding: 0,
+  },
+};
+
 export async function generateImagesAsync({
   emojiId,
   image,
@@ -91,23 +111,23 @@ export async function generateImagesAsync({
     color,
     emojiId: emojiId,
     imageUrl: image,
-    size: 2048,
-    padding: 832,
+    size: imageSpecs.splash.size,
+    padding: imageSpecs.splash.padding,
   });
 
   const icon = await createAppIcon({
     color,
     emojiId: emojiId,
     imageUrl: image,
-    size: 1024,
-    padding: 128,
+    size: imageSpecs.icon.size,
+    padding: imageSpecs.icon.padding,
   });
   const faviconPng = await createAppIcon({
     color: "transparent",
     emojiId: emojiId,
     imageUrl: image,
-    size: 48,
-    padding: 0,
+    size: imageSpecs.favicon.size,
+    padding: imageSpecs.favicon.padding,
   });
 
   const iconB64 = imageUriToBase64(icon);
