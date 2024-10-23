@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-// const canvas = require("canvas");
+const canvas = require("canvas");
 const path = require("path");
 const { createRequestHandler } = require("@expo/server/adapter/express");
 
-const express = require("express");
 const compression = require("compression");
 const morgan = require("morgan");
+import express from "express";
 
 const CLIENT_BUILD_DIR = path.join(process.cwd(), "dist/client");
 const SERVER_BUILD_DIR = path.join(process.cwd(), "dist/server");
@@ -28,6 +28,23 @@ app.use(
 );
 
 app.use(morgan("tiny"));
+
+app.get("/icon", async (req: express.Request, res: express.Response) => {
+  const { emojiId, color } = req.query;
+  if (emojiId === null || color === null) {
+    res.send(400).json({ error: "Missing parameters" });
+  }
+  canvas.createCanvas(1024, 1024);
+  // const icon = await createAppIcon({
+  //   color,
+  //   emojiId: emojiId,
+  //   size: 1024,
+  //   padding: 128,
+  // });
+  // res.setHeader("Content-Type", "image/png");
+  // res.send(icon);
+  res.send(200).json({ icon: "hello" });
+});
 
 app.all(
   "*",
