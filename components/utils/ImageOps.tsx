@@ -98,7 +98,7 @@ export const imageSpecs: Record<string, ImageSpec> = {
   },
   adaptive: {
     size: 1024,
-    padding: 280,
+    padding: 290,
   },
 };
 
