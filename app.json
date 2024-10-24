@@ -8,7 +8,7 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "https://icon-builder.up.railway.app/icon?color=%2306b6d4&emoji=1f3d7",
+      "image": "https://icon-builder.vellapps.com/icon?color=%2306b6d4&emoji=1f3d7",
       "resizeMode": "contain",
       "backgroundColor": "#06b6d4"
     },
@@ -17,13 +17,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "https://icon-builder.up.railway.app/splash?color=%2306b6d4&emoji=1f3d7",
+        "foregroundImage": "https://icon-builder.vellapps.com/splash?color=%2306b6d4&emoji=1f3d7",
         "backgroundColor": "#06b6d4"
       }
     },
     "web": {
       "bundler": "metro",
-      "favicon": "https://icon-builder.up.railway.app/favicon?color=%2306b6d4&emoji=1f3d7",
+      "favicon": "https://icon-builder.vellapps.com/favicon?color=%2306b6d4&emoji=1f3d7",
       "output": "server"
     },
     "plugins": ["expo-router"],

@@ -1,6 +1,7 @@
 import { useTheme } from "@/hooks/theme/ThemeContext";
 import { A, Code } from "@expo/html-elements";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Constants from "expo-constants";
 import { setStringAsync } from "expo-clipboard";
 import { useGlobalSearchParams, useRouter } from "expo-router";
 import queryString from "query-string";
@@ -19,8 +20,6 @@ type LinkSectionProps = {
 };
 
 function LinkSection({ title, location, link }: LinkSectionProps) {
-  const { colorScheme } = useTheme();
-
   const copyToClipboard = async () => {
     await setStringAsync(link);
   };
@@ -54,15 +53,16 @@ function LinkSection({ title, location, link }: LinkSectionProps) {
 export default function Modal() {
   const router = useRouter();
   const { emoji, color } = useGlobalSearchParams();
+  const hostname = process.env.EXPO_PUBLIC_HOSTNAME;
 
   function dismissModal() {
     router.dismiss();
   }
 
   const query = queryString.stringify({ emoji, color });
-  const iconLink = `https://icon-builder.up.railway.app/icon?${query}`;
-  const splashLink = `https://icon-builder.up.railway.app/splash?${query}`;
-  const faviconLink = `https://icon-builder.up.railway.app/favicon?${query}`;
+  const iconLink = `${hostname}/icon?${query}`;
+  const splashLink = `${hostname}/splash?${query}`;
+  const faviconLink = `${hostname}/favicon?${query}`;
 
   return (
     <>
