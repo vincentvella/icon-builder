@@ -85,14 +85,14 @@ export default function Modal() {
           </Text>
           <LinkSection title="Icon Link" location="expo.icon" link={iconLink} />
           <LinkSection
-            title="Adaptive Icon Link"
-            location="expo.android.adaptiveIcon.foregroundImage"
-            link={adaptiveLink}
-          />
-          <LinkSection
             title="Splash Link"
             location="expo.splash.image"
             link={splashLink}
+          />
+          <LinkSection
+            title="Adaptive Icon Link"
+            location="expo.android.adaptiveIcon.foregroundImage"
+            link={adaptiveLink}
           />
           <LinkSection
             title="Favicon Link"
