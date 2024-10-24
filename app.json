@@ -8,22 +8,22 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "https://icon-builder.up.railway.app/icon?color=%2306b6d4&emoji=1f3d7",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#06b6d4"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "https://icon-builder.up.railway.app/splash?color=%2306b6d4&emoji=1f3d7",
+        "backgroundColor": "#06b6d4"
       }
     },
     "web": {
       "bundler": "metro",
-      "favicon": "./assets/images/favicon.png",
+      "favicon": "https://icon-builder.up.railway.app/favicon?color=%2306b6d4&emoji=1f3d7",
       "output": "server"
     },
     "plugins": ["expo-router"],
