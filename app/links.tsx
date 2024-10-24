@@ -63,6 +63,7 @@ export default function Modal() {
   const iconLink = `${hostname}/icon?${query}`;
   const splashLink = `${hostname}/splash?${query}`;
   const faviconLink = `${hostname}/favicon?${query}`;
+  const adaptiveLink = `${hostname}/adaptive?${query}`;
 
   return (
     <>
@@ -83,6 +84,11 @@ export default function Modal() {
             &nbsp;file.
           </Text>
           <LinkSection title="Icon Link" location="expo.icon" link={iconLink} />
+          <LinkSection
+            title="Icon Link"
+            location="expo.android.adaptiveIcon.foregroundImage"
+            link={adaptiveLink}
+          />
           <LinkSection
             title="Splash Link"
             location="expo.splash.image"

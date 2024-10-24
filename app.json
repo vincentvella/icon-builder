@@ -4,22 +4,24 @@
     "slug": "icon-builder",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "https://icon-builder.vellapps.com/icon?color=%2306b6d4&emoji=1f3d7",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "https://icon-builder.vellapps.com/icon?color=%2306b6d4&emoji=1f3d7",
-      "resizeMode": "contain",
+      "image": "https://icon-builder.vellapps.com/splash?color=%2306b6d4&emoji=1f3d7",
+      "resizeMode": "cover",
       "backgroundColor": "#06b6d4"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vellapps.iconbuilder"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "https://icon-builder.vellapps.com/splash?color=%2306b6d4&emoji=1f3d7",
+        "foregroundImage": "https://icon-builder.vellapps.com/adaptive?color=%2306b6d4&emoji=1f3d7",
         "backgroundColor": "#06b6d4"
-      }
+      },
+      "package": "com.vellapps.iconbuilder"
     },
     "web": {
       "bundler": "metro",
