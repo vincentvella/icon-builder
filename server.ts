@@ -96,6 +96,18 @@ app.get("/icon", async (req: express.Request, res: express.Response) => {
   res.setHeader("Content-Type", "image/png").send(image);
 });
 
+app.get("/adaptive", async (req: express.Request, res: express.Response) => {
+  const result = await requestValidator.safeParseAsync(req.query);
+  if (!result.success) {
+    res.send(400).json({ error: "Missing parameters" });
+    return;
+  }
+
+  const { emoji, color } = result.data;
+  const image = await generateImage(color, emoji, imageSpecs.adaptive);
+  res.setHeader("Content-Type", "image/png").send(image);
+});
+
 app.get("/splash", async (req: express.Request, res: express.Response) => {
   const result = await requestValidator.safeParseAsync(req.query);
   if (!result.success) {
